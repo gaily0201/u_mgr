@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items>
+	<item>
+		<itemKey>0001</itemKey>
+		<itemName>菜单注册</itemName>
+		<itemRule>sm_menuitemreg</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<fixedWhere>menuitemcode like 'mgr%' </fixedWhere>
+	</item>
+	
+	<item>
+		<itemKey>0002</itemKey>
+		<itemName>功能注册</itemName>
+		<itemRule>sm_funcregister</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<fixedWhere>funcode like 'mgr%'</fixedWhere>
+	</item>
+
+	<item>
+		<itemKey>0008</itemKey>
+		<itemName>系统类型</itemName>
+		<itemRule>dap_dapsystem</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<fixedWhere>MODULEID  like 'mgr%' </fixedWhere>
+	</item>
+	
+		<item>
+		<itemKey>0003</itemKey>
+		<itemName>单据模版</itemName>
+		<itemRule>pub_billtemplet</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField>nodecode</grpField>
+		<fixedWhere>pk_billtypecode like 'mgr%'</fixedWhere>
+	</item>
+	
+		<item>
+		<itemKey>0004</itemKey>
+		<itemName>查询模版</itemName>
+		<itemRule>pub_query_templet</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField>node_code</grpField>
+		<fixedWhere>NODE_CODE LIKE 'mgr%' </fixedWhere>
+	</item>
+	
+	<item>
+		<itemKey>0009</itemKey>
+		<itemName>元数据</itemName>
+		<itemRule>md_module</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<fixedWhere> DISPLAYNAME like 'mgr%'</fixedWhere>
+	</item>
+	
+	<item>
+		<itemKey>0021</itemKey>
+		<itemName>参照表</itemName>
+		<itemRule>bd_reftable</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<fixedWhere>1=0</fixedWhere>
+	</item>
+	
+	<item>
+		<itemKey>0022</itemKey>
+		<itemName>参照信息</itemName>
+		<itemRule>bd_refinfo</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<fixedWhere>1=0</fixedWhere>
+	</item>
+
+	<item>
+		<itemKey>0024</itemKey>
+		<itemName>管控模式</itemName>
+		<itemRule>bd_mode_all</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<fixedWhere>mdclassid in(select md_class.id from md_class where md_class.componentid in (select md_component.id from md_component where md_component.ownmodule in('mgr')))</fixedWhere>
+	</item>
+
+	<item>
+		<itemKey>0025</itemKey>
+		<itemName>管控模式</itemName>
+		<itemRule>bd_mode_selected</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<fixedWhere>mdclassid in(select md_class.id from md_class where md_class.componentid in (select md_component.id from md_component where md_component.ownmodule in('mgr')))</fixedWhere>
+	</item>
+
+	<item>
+		<itemKey>0026</itemKey>
+		<itemName>职责</itemName>
+		<itemRule>sm_responsibility</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<fixedWhere>1=0</fixedWhere>
+	</item>
+	
+	<item>
+		<itemKey>0027</itemKey>
+		<itemName>职责功能</itemName>
+		<itemRule>sm_resp_func</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<fixedWhere>1=0</fixedWhere>
+	</item>
+
+	<item>
+		<itemKey>0028</itemKey>
+		<itemName>角色</itemName>
+		<itemRule>sm_role</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<fixedWhere>1=0</fixedWhere>
+	</item>
+
+	<item>
+		<itemKey>0029</itemKey>
+		<itemName>角色组</itemName>
+		<itemRule>sm_role_group</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<fixedWhere>1=0</fixedWhere>
+	</item>
+	
+	<item>
+		<itemKey>0030</itemKey>
+		<itemName>用户组</itemName>
+		<itemRule>sm_usergroup</itemRule> 
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField> 
+		<fixedWhere>1=0</fixedWhere>
+	</item>
+	
+	<item>
+		<itemKey>0031</itemKey>
+		<itemName>用户用户组</itemName>
+		<itemRule>sm_user_group</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<fixedWhere>1=0</fixedWhere>
+	</item>
+	
+	<item>
+		<itemKey>0032</itemKey>
+		<itemName>用户角色</itemName>
+		<itemRule>sm_user_role</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<fixedWhere>1=0</fixedWhere>
+	</item>
+	
+	<item>
+		<itemKey>0033</itemKey>
+		<itemName>角色分配的组织</itemName>
+		<itemRule>sm_subject_org</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<fixedWhere>1=0</fixedWhere>
+	</item>	
+	
+	<item>
+		<itemKey>0034</itemKey>
+		<itemName>角色分配的职责</itemName>
+		<itemRule>sm_perm_func</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<fixedWhere>1=0</fixedWhere>
+	</item>
+	
+	<item>
+		<itemKey>pub_msgtemp</itemKey>
+		<itemName>消息模板</itemName>
+		<itemRule>pub_msgtemp</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<!-- 建议根据TEMPDSCRPT筛选 -->
+		<fixedWhere> typecode like 'mgr%'</fixedWhere>
+	</item>
+	
+	<item>
+		<itemKey>pub_msgtemp_type</itemKey>
+		<itemName>消息模板分类</itemName>
+		<itemRule>pub_msgtemp_type</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<!-- 建议根据NAME筛选 -->
+		<fixedWhere> tempcode like 'mgr%'</fixedWhere>
+	</item>
+	
+	<item>
+		<itemKey>0005</itemKey>
+		<itemName>打印模版</itemName>
+		<itemRule>pub_print_template</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField>vnodecode</grpField>
+		<fixedWhere>1=0</fixedWhere>
+	</item>
+	
+		<item>
+		<itemKey>0006</itemKey>
+		<itemName>默认模板分配</itemName>
+		<itemRule>pub_systemplate_base</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<fixedWhere>funnode like 'mgr%' </fixedWhere>
+	</item>	
+	
+	<item>
+		<itemKey>0007</itemKey>
+		<itemName>单据类型</itemName>
+		<itemRule>bd_billtype</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<fixedWhere> nodecode like 'mgr%'</fixedWhere>
+	</item>
+	
+	<item>
+		<itemKey>0035</itemKey>
+		<itemName>编码规则基本信息</itemName>
+		<itemRule>pub_bcr_rulebase</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<fixedWhere>1=0</fixedWhere>
+	</item>
+	
+	<item>
+		<itemKey>0036</itemKey>
+		<itemName>编码规则元素</itemName>
+		<itemRule>pub_bcr_elem</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<fixedWhere>1=0</fixedWhere>
+	</item>
+	
+	<item>
+		<itemKey>0010</itemKey>
+		<itemName>自定义档案列表</itemName>
+		<itemRule>bd_defdoclist</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField></grpField>
+		<fixedWhere>1=0</fixedWhere>
+	</item>
+
+	<item>
+		<itemKey>pub_alertregistry</itemKey>
+		<itemName>预警条目与后台任务</itemName>
+		<itemRule>pub_alertregistry</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField>vnodecode</grpField>
+		<fixedWhere>1=0</fixedWhere>
+	</item>
+	
+		<item>
+		<itemKey>pub_alertruntime</itemKey>
+		<itemName>后台任务类型注册</itemName>
+		<itemRule>PUB_ALERTTYPE</itemRule>
+		<sysField></sysField>
+		<corpField></corpField>
+		<grpField>vnodecode</grpField>
+		<fixedWhere>1=0</fixedWhere>
+	</item>
+</items>

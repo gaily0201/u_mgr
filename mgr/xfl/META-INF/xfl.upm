@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="gbk"?>
+<module name="xfl">
+	<public>
+		    <!-- 接口 -->
+		    <component priority="0" singleton="true" remote="true" tx="CMT" supportAlias="true">
+	      <interface>cn.gaily.mgr.etl.itf.IMgrXflService</interface>
+	      <implementation>cn.gaily.mgr.etl.impl.MgrXflServiceImpl</implementation>
+	    </component>
+	</public>
+</module>
