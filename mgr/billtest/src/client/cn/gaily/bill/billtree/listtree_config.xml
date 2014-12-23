@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="context" class="nc.vo.uif2.LoginContext"/>
+  
+	<bean id="toftpanelActionContributors" class="nc.ui.uif2.actions.ActionContributors">
+  		<property name="contributors">
+  			<list>
+	  			<ref bean="orgunitTreeListViewActions"/>
+	  			<ref bean="orgunitCardViewActions"/>
+  			</list>
+  		</property>
+	</bean>
+	
+	<bean id="orgunitTreeListViewActions" class="nc.ui.uif2.actions.StandAloneToftPanelActionContainer">
+  		<constructor-arg><ref bean="listTreeView"/></constructor-arg>
+	  	<property name="actions">
+	     	<list>
+	     		<ref bean="addaction"/>
+	     		<ref bean="editaction"/>
+	     		<ref bean="deleteaction"/>
+	     		<ref bean="separatoraction"/>
+	     		
+				<ref bean="refreshaction" />
+	     	</list>
+	     </property>
+	     <property name="editActions">
+	     	<list>
+	     		<ref bean="saveaction"/>
+	     		<ref bean="saveaddaction"/>
+	     		<ref bean="separatoraction"/>
+	     		<ref bean="cancelaction"/>
+	     	</list>
+	     </property>
+	     <property name="model"><ref bean="listtreemodel" /></property>
+	</bean>
+  
+	<bean id="orgunitCardViewActions" class="nc.ui.uif2.actions.StandAloneToftPanelActionContainer">
+		<constructor-arg><ref bean="editor"/></constructor-arg>
+		<property name="actions">
+	     	<list>
+	     		<ref bean="addaction"/>
+	     		<ref bean="editaction"/>
+	     		<ref bean="deleteaction"/>
+	     		<ref bean="separatoraction"/>
+	     		
+				<ref bean="refreshaction" />
+	     	</list>
+	     </property>
+	     <property name="editActions">
+	     	<list>
+	     		<ref bean="saveaction"/>
+	     		<ref bean="saveaddaction"/>
+	     		<ref bean="separatoraction"/>
+	     		<ref bean="cancelaction"/>
+	     	</list>
+	     </property>
+	     <property name="model"><ref bean="listtreemodel" /></property>
+	</bean>
+	  
+	<!-- 视图部分 -->
+	<bean id="container" class="nc.ui.uif2.TangramContainer" init-method="initUI">
+		<property name="tangramLayoutRoot">
+			<bean class="nc.ui.uif2.tangramlayout.node.TBNode">
+				<property name="tabs">
+					<list>
+						<bean class="nc.ui.uif2.tangramlayout.node.HSNode">
+							<property name="name">
+								<bean class="nc.ui.uif2.I18nFB">
+								  	<property name="resDir" value="org"></property>
+									<property name="resId" value="UC001-0000107"></property>
+									<property name="defaultValue" value="列表"></property>
+								</bean>
+							</property>
+							<property name="left">
+							<bean class="nc.ui.uif2.tangramlayout.node.CNode">
+								<property name="name">
+									<bean class="nc.ui.uif2.I18nFB">
+									  	<property name="resDir" value="org"></property>
+										<property name="resId" value="0org0002"></property>
+										<property name="defaultValue" value="查询区域"></property>
+									</bean>
+								</property>
+								<property name="component"><ref bean="listTreeQryPanel"/></property>
+							</bean>
+							</property>
+							<property name="right">
+								<bean class="nc.ui.uif2.tangramlayout.node.VSNode">
+									<property name="up">
+										<bean class="nc.ui.uif2.tangramlayout.node.CNode">
+											<property name="component" ref="listTreeView"></property>
+										</bean>
+									</property>
+									<property name="down">
+										<bean class="nc.ui.uif2.tangramlayout.node.CNode">
+											<property name="component" ref="listTreeView2"></property>
+										</bean>
+									</property>
+								</bean>
+							</property>
+							<property name="dividerLocation" value="0.2f"></property>
+						</bean>
+				 		<bean class="nc.ui.uif2.tangramlayout.node.CNode">
+				 			<property name="component" ref="editor"></property>
+				 		</bean>
+					</list>
+				</property>
+				<property name="showMode" value="CardLayout"></property>
+			</bean>	
+		</property>
+		<property name="model" ref="listtreemodel"/>
+	</bean>
+	
+	<bean id="listTreeQryPanel" class="nc.ui.uif2.actions.QueryAreaShell" init-method="initUI">
+		<property name="queryArea">
+			<bean factory-bean="queryaction" factory-method="createQueryArea"></bean>
+		</property>
+	</bean>
+	
+ 	<bean id="editor" class="cn.gaily.bill.billtree.ListBillForm" init-method="initUI">
+		<property name="model" ref="listtreemodel" />
+		<property name="nodekey" value="bt"/>
+		<property name="templateContainer"><ref bean="templateContainer"/></property>
+	</bean>
+ 	
+	<bean id="treeCreateStrategy" class="cn.gaily.bill.singlebilltree.ListTreeCreateStrategy">
+		<property name="factory" ref="boadapterfacotry" />
+		<property name="rootName" value="树" />
+		<property name="className"><value>nc.vo.mgr.singlebill.SingleBill</value></property>
+	</bean>
+  
+	
+	<bean id="boadapterfacotry" class="nc.vo.bd.meta.BDObjectAdpaterFactory"></bean>
+  
+	<bean id="modelService" class="cn.gaily.base.ui.proxy.SingleServiceProxy" >
+		<property name="voClass"><value>nc.vo.mgr.singlebill.SingleBill</value></property>
+	</bean>
+	
+	<bean id="listtreemodel" class="nc.ui.uif2.model.HierachicalDataAppModel">
+	  	<property name="service"><ref bean="modelService"/></property>
+	  	<property name="context"><ref bean="context"/></property>
+	  	<property name="treeCreateStrategy"><ref bean="treeCreateStrategy"/></property>
+	  	<property name="businessObjectAdapterFactory"><ref bean="boadapterfacotry"/></property>
+	</bean>
+
+	<bean id="modelDataManager" class="cn.gaily.bill.singlebilltree.ListTreeDataManager" >
+		<property name="model"><ref bean="listtreemodel"/></property> 
+		<property name="service"><ref bean="modelService"/></property>
+	</bean>
+
+	<bean id="templateContainer" class="nc.ui.uif2.editor.TemplateContainer" init-method="load">
+		<property name="context"><ref bean="context" /></property>
+		<property name="nodeKeies">
+			<list>
+				<value>bt</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="queryTemplateContainer" class="nc.ui.uif2.editor.QueryTemplateContainer">
+		<property name="context"><ref bean="context" /></property>
+		<property name="nodeKey"><value>qt</value></property>
+	</bean>
+	
+	<bean id="remoteCallCombinatorCaller" class="nc.ui.uif2.editor.UIF2RemoteCallCombinatorCaller">
+		<property name="remoteCallers">
+			<list>
+				<ref bean="templateContainer" />			
+				<ref bean="queryTemplateContainer" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="listTreeView" class="cn.gaily.bill.billtree.ListTreeView" init-method="initUI">
+		<property name="templateContainer" ref="templateContainer"></property>
+		<property name="nodekey"><value>bt</value></property>
+		<property name="model" ref="listtreemodel"></property>
+		<property name="name"><value>tree</value> </property>
+		<property name="north" ref="listToolBarPanel"></property>
+	</bean>
+	<bean id="listTreeView2" class="cn.gaily.bill.billtree.ListTreeView2" init-method="initUI">
+		<property name="templateContainer" ref="templateContainer"></property>
+		<property name="nodekey"><value>bt</value></property>
+		<property name="model" ref="listtreemodel"></property>
+		<property name="name"><value>tree</value> </property>
+		<property name="north" ref="listToolBarPanel"></property>
+	</bean>
+	
+	<bean id="listToolBarPanel" class="nc.ui.uif2.tangramlayout.CardLayoutToolbarPanel">
+		<property name="model" ref="listtreemodel" />
+	</bean>
+     
+	<bean id="componentValueManager" class="nc.ui.uif2.editor.value.BillCardPanelHeadVOValueAdapter">
+		<property name="headVOName" value="nc.vo.mgr.singlebill.SingleBill" />
+	</bean>
+	
+  	<bean id="separatoraction" class="nc.funcnode.ui.action.SeparatorAction" />
+	
+	<bean id="showListInterceptor" class="nc.ui.pubapp.uif2app.actions.interceptor.ShowUpComponentInterceptor">
+		<property name="showUpComponent" ref="listTreeView" />
+	</bean>
+  	
+	<bean id="showCardInterceptor" class="nc.ui.pubapp.uif2app.actions.interceptor.ShowUpComponentInterceptor">
+		<property name="showUpComponent" ref="editor" />
+	</bean>
+	
+	<bean id="addaction" class="cn.gaily.bill.billtree.AddAction">
+		<property name="model"><ref bean="listtreemodel"/></property>
+		<property name="editor"><ref bean="editor"/></property>
+		<property name="interceptor" ref="showCardInterceptor" />
+	</bean>
+	
+	<bean id="editaction" class="nc.ui.pubapp.uif2app.actions.EditAction">
+		<property name="model"><ref bean="listtreemodel"/></property>
+	</bean>
+	
+	<bean id="cancelaction" class="nc.ui.pubapp.uif2app.actions.CancelAction">
+		<property name="model"><ref bean="listtreemodel"/></property>
+		<property name="editor"><ref bean="editor"/></property>
+		<property name="interceptor" ref="showListInterceptor" />
+	</bean>
+	
+	<bean id="saveaction" class="nc.ui.uif2.actions.SaveAction">
+		<property name="model"><ref bean="listtreemodel"/></property>
+		<property name="editor"><ref bean="editor"/></property>
+		<property name="interceptor" ref="showListInterceptor" />
+	 </bean>
+	 
+	<bean id="saveaddaction" class="nc.ui.uif2.actions.SaveAddAction">
+		<property name="model"><ref bean="listtreemodel" /></property>
+		<property name="editor"><ref bean="editor" /></property>
+	</bean>
+	
+	<bean id="deleteaction" class="nc.ui.uif2.actions.DeleteAction">
+		<property name="model"><ref bean="listtreemodel"/></property>
+	</bean>
+	
+	<bean id="refreshaction" class="nc.ui.uif2.actions.RefreshAction">
+		<property name="model"><ref bean="listtreemodel" /></property>
+		<property name="dataManager"><ref bean="modelDataManager" /></property>
+	</bean>
+	
+	<bean id="queryaction" class="nc.ui.uif2.actions.QueryAction">
+		<property name="model"><ref bean="listtreemodel" /></property>
+		<property name="dataManager"><ref bean="modelDataManager" /></property>
+		<property name="queryDelegator"><ref bean="orgUnitQueryDelegator" /></property>
+		<property name="templateContainer"><ref bean="queryTemplateContainer" /></property>
+	</bean>
+	 
+	<bean id="orgUnitQueryDelegator" class = "nc.ui.org.OrgUnitQueryDelegator">
+		<property name="context"><ref bean="context" /></property>
+	 	<property name="nodeKey"><value>qt</value></property>
+	</bean>
+	 
+	<bean id="returnAction" class="nc.ui.uif2.actions.ShowMeUpAction">
+		<property name="goComponent"><ref bean="editor" /></property>
+	</bean>
+	 
+	<bean id="ClosingListener" class="nc.ui.uif2.FunNodeClosingHandler">
+		<property name="model" ref="listtreemodel" />
+	 	<property name="saveaction" ref="saveaction" />
+	 	<property name="cancelaction" ref="cancelaction" />
+	</bean>
+
+</beans>
+

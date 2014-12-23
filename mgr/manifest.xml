@@ -18,4 +18,22 @@
     </resource>
     <funnodes/>
   </BusinessComponet>
+  <BusinessComponet name="billtest" dispname="单据测试">
+    <public>
+      <src name="src/public"/>
+    </public>
+    <client>
+      <src name="src/client"/>
+    </client>
+    <private>
+      <src name="src/private"/>
+    </private>
+    <test>
+      <src name="src/test"/>
+    </test>
+    <resource>
+      <src name="resources"/>
+    </resource>
+    <funnodes/>
+  </BusinessComponet>
 </Manifest>
